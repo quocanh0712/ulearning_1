@@ -12,11 +12,13 @@ import 'package:ulearning_1/pages/welcome/welcome.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'common/values/colors.dart';
+import 'firebase_options.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
   runApp(MyApp());
 }
 
@@ -31,7 +33,6 @@ class MyApp extends StatelessWidget {
         child: ScreenUtilInit(
           builder: (context, child) => MaterialApp(
             theme: ThemeData(
-
               appBarTheme:
                   AppBarTheme(
                     iconTheme: IconThemeData(
