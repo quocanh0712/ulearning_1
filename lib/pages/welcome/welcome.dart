@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ulearning_1/common/values/constant.dart';
+import 'package:ulearning_1/global.dart';
 import 'package:ulearning_1/main.dart';
 import 'package:ulearning_1/pages/welcome/bloc/welcome_blocs.dart';
 import 'package:ulearning_1/pages/welcome/bloc/welcome_event.dart';
@@ -120,6 +122,8 @@ class _WelcomeState extends State<Welcome> {
                   index, duration: Duration(milliseconds: 500), curve: Curves.easeIn);
             } else {
              // Navigator.of(context).push(MaterialPageRoute(builder: (context)=> MyHomePage()));
+              Global.storageService.setBool(AppConstants.STORAGE_DEVICE_OPEN_FIRST_TIME, true);
+             // print("The value is ${Global.storageService.getDeviceFirstOpen()}");
               Navigator.of(context).pushNamedAndRemoveUntil("/sign_in", (route) => false);
             }
 

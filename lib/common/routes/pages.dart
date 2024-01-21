@@ -11,8 +11,10 @@ import 'package:ulearning_1/pages/sign_in/sign_in.dart';
 import 'package:ulearning_1/pages/welcome/bloc/welcome_blocs.dart';
 import 'package:ulearning_1/pages/welcome/welcome.dart';
 
+import '../../global.dart';
+
 class AppPages {
- static List<PageEntity> routes() {
+  static List<PageEntity> routes() {
     return [
       PageEntity(
         route: AppRoutes.INITIAL,
@@ -38,7 +40,7 @@ class AppPages {
       PageEntity(
         route: AppRoutes.APPLICATION,
         page: ApplicationPage(),
-         bloc: BlocProvider(
+        bloc: BlocProvider(
           create: (_) => AppBloc(),
         ),
       ),
@@ -48,20 +50,31 @@ class AppPages {
   static List<dynamic> allBlocProviders(BuildContext context) {
     List<dynamic> blocProviders = <dynamic>[];
     for (var bloc in routes()) {
-        blocProviders.add(bloc.bloc);
+      blocProviders.add(bloc.bloc);
     }
     return blocProviders;
   }
 
-  static MaterialPageRoute GenerateRouteSettings(RouteSettings settings){
-   if(settings.name!=null){
-
-     var result = routes().where((element) => element.route==settings.name);
-     if(result.isNotEmpty){
-       return MaterialPageRoute(builder: (_)=>result.first.page, settings: settings);
-     }
-   }
-   return MaterialPageRoute(builder: (_)=> SignIn(),settings: settings);
+  // a modal that covers entire screen as we click on navigator object
+  static MaterialPageRoute GenerateRouteSettings(RouteSettings settings) {
+    if (settings.name != null) {
+      //check for route name matching when navigator gets triggered
+      var result = routes().where((element) => element.route == settings.name);
+      if (result.isNotEmpty) {
+        print("first log");
+        print(result.first.route);
+        bool deviceFirstOpen = Global.storageService.getDeviceFirstOpen();
+        if (result.first.route == AppRoutes.INITIAL && deviceFirstOpen) {
+          print("second log");
+          return MaterialPageRoute(
+              builder: (_) =>const SignIn(), settings: settings);
+        }
+        return MaterialPageRoute(
+            builder: (_) => result.first.page, settings: settings);
+      }
+    }
+    print("invalid route name ${settings.name}");
+    return MaterialPageRoute(builder: (_) => SignIn(), settings: settings);
   }
 }
 
