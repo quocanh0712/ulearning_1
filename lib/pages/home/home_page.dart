@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ulearning_1/pages/home/bloc/home_page_blocs.dart';
+import 'package:ulearning_1/pages/home/bloc/home_page_states.dart';
 import 'package:ulearning_1/pages/home/widgets/home_page_widgets.dart';
 
 import '../../common/values/colors.dart';
@@ -18,33 +21,58 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: buildAppBar(),
-      body: Container(
-        margin: EdgeInsets.symmetric(vertical: 0, horizontal: 25.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              margin: EdgeInsets.only(top: 20.h),
-              child: Text(
-                "Hello,",
-                style: TextStyle(
+      body: BlocBuilder<HomePageBlocs, HomePageStates>(
+        builder: (context, state) {
+          return Container(
+            margin: EdgeInsets.symmetric(vertical: 0, horizontal: 25.w),
+            child: CustomScrollView(
+              //crossAxisAlignment: CrossAxisAlignment.start,
+              slivers: [
+                SliverToBoxAdapter(
+                  child: homePageText(
+                    "Hello",
                     color: AppColors.primaryThrirdElementText,
-                    fontSize: 24.sp,
-                    fontWeight: FontWeight.bold),
-              ),
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: homePageText(
+                    "Anh Quan",
+                  ),
+                ),
+                SliverPadding(
+                  padding: EdgeInsets.only(top: 20.h),
+                ),
+                SliverToBoxAdapter(
+                  child: searchView(),
+                ),
+                SliverToBoxAdapter(
+                  child: slidersView(context, state),
+                ),
+                SliverToBoxAdapter(
+                  child: menuView(),
+                ),
+                SliverPadding(
+                  padding:
+                      EdgeInsets.symmetric(vertical: 18.h, horizontal: 0.w),
+                  sliver: SliverGrid(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 15,
+                        crossAxisSpacing: 15,
+                        childAspectRatio: 1.6),
+                    delegate: SliverChildBuilderDelegate(childCount: 4,
+                        (BuildContext context, int index) {
+                      return GestureDetector(
+                        onTap: () {},
+                        child: courseGrid(),
+                      );
+                    }),
+                  ),
+                ),
+              ],
             ),
-            Container(
-              margin: EdgeInsets.only(top: 5.h),
-              child: Text(
-                "Anh Quan",
-                style: TextStyle(
-                    color: AppColors.primaryText,
-                    fontSize: 24.sp,
-                    fontWeight: FontWeight.bold),
-              ),
-            )
-          ],
-        ),
+          );
+        },
       ),
     );
   }

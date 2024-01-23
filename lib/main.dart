@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
         providers: [...AppPages.allBlocProviders(context)],
         child: ScreenUtilInit(
+          designSize: Size(375,812),
           builder: (context, child) => MaterialApp(
             theme: ThemeData(
               appBarTheme:
