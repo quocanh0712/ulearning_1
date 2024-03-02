@@ -7,6 +7,7 @@ import 'package:ulearning_1/pages/home/bloc/home_page_events.dart';
 import 'package:ulearning_1/pages/home/bloc/home_page_states.dart';
 
 import '../../../common/values/colors.dart';
+import '../../../common/widgets/base_text_widgets.dart';
 
 AppBar buildAppBar() {
   return AppBar(
@@ -174,9 +175,9 @@ Widget menuView() {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            _reusableText("Choose your course"),
+            reusableText("Choose your course"),
             GestureDetector(
-                child: _reusableText("See all",
+                child: reusableText("See all",
                     color: AppColors.primaryThrirdElementText, fontSize: 14)),
           ],
         ),
@@ -196,16 +197,7 @@ Widget menuView() {
   );
 }
 
-Widget _reusableText(String text,
-    {Color color = AppColors.primaryText,
-    int fontSize = 16,
-    FontWeight fontWeight = FontWeight.bold}) {
-  return Text(
-    text,
-    style: TextStyle(
-        color: color, fontWeight: fontWeight, fontSize: fontSize.sp),
-  );
-}
+
 
 Widget _reusableMenuText(String menuText, {Color textColor = AppColors.primaryElementText, Color backGroundColor = AppColors.primaryElement}){
   return  Container(
@@ -216,7 +208,7 @@ Widget _reusableMenuText(String menuText, {Color textColor = AppColors.primaryEl
         border: Border.all(color: backGroundColor)),
     padding: EdgeInsets.only(
         left: 15.w, right: 15.w, top: 5.h, bottom: 5.h),
-    child: _reusableText(menuText,
+    child: reusableText(menuText,
         color: textColor,
         fontWeight: FontWeight.normal,
         fontSize: 11),
