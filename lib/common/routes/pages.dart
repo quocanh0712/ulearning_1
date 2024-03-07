@@ -4,6 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ulearning_1/common/routes/names.dart';
 import 'package:ulearning_1/pages/application/application_page.dart';
 import 'package:ulearning_1/pages/application/bloc/app_blocs.dart';
+import 'package:ulearning_1/pages/course/bloc/course_blocs.dart';
+import 'package:ulearning_1/pages/course/course_detail/bloc/course_detail_blocs.dart';
+import 'package:ulearning_1/pages/course/course_detail/course_detail.dart';
+import 'package:ulearning_1/pages/course/paywebview/bloc/payview_blocs.dart';
+import 'package:ulearning_1/pages/course/paywebview/paywebview.dart';
 import 'package:ulearning_1/pages/home/bloc/home_page_blocs.dart';
 import 'package:ulearning_1/pages/home/home_page.dart';
 import 'package:ulearning_1/pages/profile/settings/bloc/settings_blocs.dart';
@@ -62,6 +67,21 @@ class AppPages {
           create: (_) => SettingsBlocs(),
         ),
       ),
+      PageEntity(
+        route: AppRoutes.COURSE_DETAIL,
+        page: CourseDetail(),
+        bloc: BlocProvider(
+          create: (_) => CourseDetailBloc(),
+        ),
+      ),
+      PageEntity(
+        route: AppRoutes.PAY_WEB_VIEW,
+        page: PayWebView(),
+        bloc: BlocProvider(
+          create: (_) => PayWebViewBlocs(),
+        ),
+      ),
+
     ];
   }
 

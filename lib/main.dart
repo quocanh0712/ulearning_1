@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_1/common/routes/pages.dart';
 import 'package:ulearning_1/pages/application/application_page.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         child: ScreenUtilInit(
           designSize: Size(375,812),
           builder: (context, child) => MaterialApp(
+            builder: EasyLoading.init(),
             theme: ThemeData(
               appBarTheme:
                   AppBarTheme(

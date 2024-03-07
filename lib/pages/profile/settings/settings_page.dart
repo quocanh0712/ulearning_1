@@ -6,6 +6,8 @@ import 'package:ulearning_1/common/routes/names.dart';
 import 'package:ulearning_1/common/values/constant.dart';
 import 'package:ulearning_1/global.dart';
 import 'package:ulearning_1/pages/application/bloc/app_blocs.dart';
+import 'package:ulearning_1/pages/home/bloc/home_page_blocs.dart';
+import 'package:ulearning_1/pages/home/bloc/home_page_events.dart';
 import 'package:ulearning_1/pages/profile/settings/bloc/settings_blocs.dart';
 import 'package:ulearning_1/pages/profile/settings/bloc/settings_states.dart';
 import '../../application/bloc/app_events.dart';
@@ -22,7 +24,9 @@ class _SettingsPageState extends State<SettingsPage> {
 
   void removeUserData(){
     context.read<AppBloc>().add(TriggerAppEvent(0));
+    context.read<HomePageBlocs>().add( HomePageDots(0));
     Global.storageService.remove(AppConstants.STORAGE_USER_TOKEN_KEY);
+    Global.storageService.remove(AppConstants.STORAGE_USER_PROFILE_KEY);
     Navigator.of(context).pushNamedAndRemoveUntil(AppRoutes.SIGN_IN, (route) => false);
   }
   @override
